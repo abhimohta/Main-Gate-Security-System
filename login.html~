@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>BITS Pilani Goa Campus Security Software</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="templated-prism/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body>
+
+<!--		<!-- Banner -->
+			<section id="banner">
+				<div class="inner split">
+					<section>
+					<div align="left">
+						<h2>Gate Software Login</a></h2><br>
+					</div>
+					</section>
+					<section>
+					<div>
+						<center><img src="templated-prism/images/bits-logo.png" />
+					</div>
+					</section>
+				</div>
+			</banner>
+			
+			<section id="two" class="wrapper style2 alt">
+				
+						<div class="content">
+						<h3>
+							<form method="post" action="index.php">
+							<label> Username </label>
+							<input type="text" name="username" required />
+							<label> Password </label>
+							<input type="text" name="password" required />
+							<br />
+							<input type="submit" value="Login" class="button special" />
+							</form>
+						</div>
+						
+						
+
+</body>
+</html>
+
+					

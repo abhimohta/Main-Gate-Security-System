@@ -1,0 +1,34 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "password";
+$id = $_POST['idno'];
+$place = $_POST['place'];
+session_start();
+        $_SESSION['idno'] = $id;
+        $_SESSION['place'] = $place;
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+//echo "Connected successfully\n";
+
+$sql = "USE Gate_Software";
+if($conn->query($sql) === TRUE){
+	//echo "Using project DB";
+}else{
+	//echo "Error in using project DB".$conn->error;
+}
+
+$sql = "SELECT * FROM InOutDetails WHERE ID='$id' AND InDate='0000-00-00' AND InTime='00:00:00';";
+$result = $conn->query($sql);
+if($result->num_rows==1){
+	header('Location: coming_back.php'); die;
+}else
+{
+	header('Location: going_out.php');die;
+}
+?>

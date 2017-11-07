@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<title>BITS Pilani Goa Campus Security Software</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="templated-prism/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body>
+
+<!--		<!-- Banner -->
+			<section id="banner">
+				<div class="inner split">
+					<section>
+					<div align="left"><h2>Coming Back</a></h2>
+					</div>
+					</section>
+					<section>
+					<div align="right">
+						<img src="./templated-prism/images/bits-logo.png" />
+					</div>
+					</section>
+				</div>
+			</section>
+
+
+
+<?php
+session_start();
+
+if(!isset($_SESSION['userid']))
+	header('Location: login.php'); 
+
+require 'models/functions.php';
+require 'models/connect.php';
+
+$id = $_SESSION['idno'];
+
+$sql = "USE swd";
+if($conn->query($sql) === TRUE){
+	//echo "Using project DB";
+}else{
+	//echo "Error in using project DB".$conn->error;
+}
+
+$sql = "SELECT * FROM InOutDetails WHERE ID='$id' AND InDate='0000-00-00' AND InTime='00:00:00';";
+$result = $conn->query($sql);
+if($result->num_rows==1){
+	$row = $result->fetch_assoc();
+	$id = $row['ID'];
+        $name=$row['Name'];
+        $phone=$row['Phone'];
+        $hostel=$row['Hostel'];
+        $room=$row['Room'];
+        $place=$row['Place'];
+	$exitid = $row['exit_id'];
+        $indate= date('Y-m-d');
+	$intime= date('H:i:s');
+	$update_db = "UPDATE InOutDetails SET OnCampus=1, InDate='$indate', InTime='$intime' WHERE exit_id=$exitid;";
+	
+	
+	echo "<section id=\"one\" class=\"wrapper\">
+				<div class=\"inner split\">
+					<section>
+						<img src=\"./templated-prism/images/ID Pics/$id.jpg\" height=\"200\" width=\"200\"/>
+				</section>
+					<section>
+						<ul class=\"checklist\">
+							<li>Name: $name</li>
+							<li>Hostel: $hostel $room</li>
+							<li>Place: $place</li>
+							<li>Mobile: $phone</li>
+						</ul>
+					</section>
+				
+				
+				</div>
+			</section>";
+
+	
+	
+	
+	
+	
+	
+	
+	
+	$conn->query($update_db);
+}else{
+	echo "Invalid entry";
+}
+
+echo "<ul class=\"actions special\"><li><form method=\"post\" action=\"index.php\"><input type=\"submit\" value=\"Main Page\" class=\"button special\" /></form>";
+$conn->close();
+?> 
+
+</body>
+</html>
